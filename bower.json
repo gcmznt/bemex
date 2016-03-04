@@ -1,0 +1,25 @@
+{
+  "name": "bemex",
+  "description": "BEM Regex Generator",
+  "main": "bemex.js",
+  "authors": [
+    "Giacomo Zinetti <giacomo.zinetti@giko.it> (https://giko.it)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bem",
+    "regexp"
+  ],
+  "homepage": "https://github.com/giacomozinetti/bemex",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

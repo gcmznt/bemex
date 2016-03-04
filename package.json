@@ -2,7 +2,7 @@
   "name": "bemex",
   "version": "1.0.0",
   "description": "BEM Regex Generator",
-  "main": "BemEx.js",
+  "main": "bemex.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/giacomozinetti/bemex.git"
