@@ -19,7 +19,7 @@ bower install --save bemex
 
 ```
 var BemEx = require('bemex');
-BemEx(config);
+var re = BemEx(config);
 ```
 
 ### Browser
@@ -31,7 +31,7 @@ BemEx(config);
 </script>
 ```
 
-## Configuration
+## Configuration default
 
 ```
 {
@@ -49,17 +49,24 @@ BemEx(config);
 }
 ```
 
+### Get defaults
+
+```
+var BemEx = require('bemex');
+console.log(BemEx.defaults);
+```
+
 ## Formats available
 
 ```
-pascal,
-camel,
-kebab,
-snake,
-upperKebab,
-upperSnake,
-lower,
-upper,
+pascal, camel, kebab, snake, upperKebab, upperSnake, lower, upper
+```
+
+### Get formats
+
+```
+var BemEx = require('bemex');
+console.log(BemEx.formats);
 ```
 
 ## Running the tests
