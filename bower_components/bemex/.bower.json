@@ -1,0 +1,36 @@
+{
+  "name": "bemex",
+  "description": "BEM Regex Generator",
+  "main": "bemex.js",
+  "authors": [
+    "Giacomo Zinetti <giacomo.zinetti@giko.it> (https://giko.it)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bem",
+    "regexp"
+  ],
+  "homepage": "https://github.com/giacomozinetti/bemex",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.0.1",
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "3349f1be0a654372b3098284bb86dc49078d2942"
+  },
+  "_source": "git://github.com/giacomozinetti/bemex.git",
+  "_target": "^1.0.1",
+  "_originalSource": "bemex",
+  "_direct": true
+}

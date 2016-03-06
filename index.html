@@ -1,1 +1,217 @@
-My Page
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BemEx Generator</title>
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#2F3BA2">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+      button.button-primary {
+        position: relative;
+      }
+      button.button-primary::after {
+        opacity: 0;
+        content: 'copied';
+        transition: all ease 300ms;
+        position: absolute;
+        top: 100%;
+        color: black;
+        left: 0;
+        width: 100%;
+      }
+      button.button-primary.done::after {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>BemEx Generator</h1>
+      <p>
+        Generate Regex to validate your BEM with your chosen linter.
+      </p>
+      <p>
+        The default configuration is for this BEM formats:
+      </p>
+      <ul>
+        <li>block-name__element-name--modifier-name@query</li>
+        <li>is-state</li>
+      </ul>
+      <div class="row">
+        <div class="four columns">
+          <label>Block</label>
+        </div>
+        <div class="three columns">
+          <input class="u-full-width" type="text" placeholder="Prefix" id="b-p">
+        </div>
+        <div class="five columns">
+          <select class="u-full-width" id="b-f">
+            <option value="pascal">PascalCase</option>
+            <option value="camel">camelCase</option>
+            <option value="kebab" selected>kebab-case</option>
+            <option value="upperKebab">KEBAB-CASE-UPPER</option>
+            <option value="snake">snake_case</option>
+            <option value="upperSnake">SNAKE_CASE_UPPER</option>
+            <option value="lower">lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="four columns">
+          <label>Element</label>
+        </div>
+        <div class="three columns">
+          <input class="u-full-width" type="text" placeholder="Prefix: __" id="e-p">
+        </div>
+        <div class="five columns">
+          <select class="u-full-width" id="e-f">
+            <option value="pascal">PascalCase</option>
+            <option value="camel">camelCase</option>
+            <option value="kebab" selected>kebab-case</option>
+            <option value="upperKebab">KEBAB-CASE-UPPER</option>
+            <option value="snake">snake_case</option>
+            <option value="upperSnake">SNAKE_CASE_UPPER</option>
+            <option value="lower">lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="four columns">
+          <label>Modifier</label>
+        </div>
+        <div class="three columns">
+          <input class="u-full-width" type="text" placeholder="Prefix: --" id="m-p">
+        </div>
+        <div class="five columns">
+          <select class="u-full-width" id="m-f">
+            <option value="pascal">PascalCase</option>
+            <option value="camel">camelCase</option>
+            <option value="kebab" selected>kebab-case</option>
+            <option value="upperKebab">KEBAB-CASE-UPPER</option>
+            <option value="snake">snake_case</option>
+            <option value="upperSnake">SNAKE_CASE_UPPER</option>
+            <option value="lower">lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="four columns">
+          <label>Query</label>
+        </div>
+        <div class="three columns">
+          <input class="u-full-width" type="text" placeholder="Prefix: @" id="q-p">
+        </div>
+        <div class="five columns">
+          <select class="u-full-width" id="q-f">
+            <option value="pascal">PascalCase</option>
+            <option value="camel">camelCase</option>
+            <option value="kebab" selected>kebab-case</option>
+            <option value="upperKebab">KEBAB-CASE-UPPER</option>
+            <option value="snake">snake_case</option>
+            <option value="upperSnake">SNAKE_CASE_UPPER</option>
+            <option value="lower">lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="four columns">
+          <label>State</label>
+        </div>
+        <div class="three columns">
+          <input class="u-full-width" type="text" placeholder="Prefix: -" id="s-p">
+        </div>
+        <div class="five columns">
+          <select class="u-full-width" id="s-f">
+            <option value="pascal">PascalCase</option>
+            <option value="camel">camelCase</option>
+            <option value="kebab" selected>kebab-case</option>
+            <option value="upperKebab">KEBAB-CASE-UPPER</option>
+            <option value="snake">snake_case</option>
+            <option value="upperSnake">SNAKE_CASE_UPPER</option>
+            <option value="lower">lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="four columns">
+          <label>States</label>
+        </div>
+        <div class="eight columns">
+          <input class="u-full-width" type="text" placeholder="u, is, has, js" id="s">
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="ten columns">
+          <input id="result" type="text" class="u-full-width">
+        </div>
+        <div class="two columns">
+          <button class="button-primary" data-clipboard-target="#result">
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+    <script src="./bower_components/bemex/bemex.js"></script>
+    <script type="text/javascript">
+      var clipboard = new Clipboard('.button-primary');
+
+      clipboard.on('success', function(e) {
+        e.trigger.classList.add('done');
+        setTimeout(function() {
+          e.trigger.classList.remove('done');
+        }, 5000);
+      });
+
+      var generate = function() {
+        var re = BemEx({
+          blockPrefix: document.getElementById('b-p').value,
+          blockFormat: document.getElementById('b-f').value,
+          elemePrefix: document.getElementById('e-p').value,
+          elemeFormat: document.getElementById('e-f').value,
+          modifPrefix: document.getElementById('m-p').value,
+          modifFormat: document.getElementById('m-f').value,
+          queryPrefix: document.getElementById('q-p').value,
+          queryFormat: document.getElementById('q-f').value,
+          statePrefix: document.getElementById('s-p').value,
+          stateFormat: document.getElementById('s-f').value,
+          states: document.getElementById('s').value,
+        });
+        document.getElementById('result').value = re;
+      };
+      generate();
+
+      [
+        'b-p', 'b-f',
+        'e-p', 'e-f',
+        'm-p', 'm-f',
+        'q-p', 'q-f',
+        's-p', 's-f',
+        's'
+      ].forEach(function(id) {
+        document.getElementById(id).addEventListener('change', generate)
+        document.getElementById(id).addEventListener('keyup', generate)
+      });
+    </script>
+  </body>
+</html>
