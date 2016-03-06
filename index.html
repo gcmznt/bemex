@@ -186,6 +186,7 @@
 
       clipboard.on('success', function(e) {
         e.trigger.classList.add('done');
+        ga && ga('send', 'event', 'exp', 'copy', e.text);
         setTimeout(function() {
           e.trigger.classList.remove('done');
         }, 5000);
