@@ -90,7 +90,7 @@
       }
     }
     document.getElementById('url').value =
-      location.origin + '/#' + hash.join('&');
+      location.origin + location.pathname + '#' + hash.join('&');
   };
 
   var update = function() {
