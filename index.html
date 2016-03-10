@@ -21,10 +21,14 @@
         content: 'copied';
         transition: all ease 300ms;
         position: absolute;
-        top: 100%;
-        color: black;
-        left: 0;
-        width: 100%;
+        top: -50%;
+        left: 60%;
+        z-index: 100;
+        background: rgba(0,0,0,.75);
+        padding: 5px 10px;
+        line-height: 1;
+        border-radius: 5px;
+        color: white;
       }
       button.button-primary.done::after {
         opacity: 1;
@@ -43,10 +47,9 @@
     </script>
     <div class="container">
       <h1>Bem RegExp Generator</h1>
-      <h4>Build with <a href="https://github.com/giacomozinetti/bemex">bemex</a></h4>
-      <p>
-        Generate Regex to validate your BEM with your chosen linter.
-      </p>
+      <h5>
+        Delivering BEM Regexp to your linter since 2016
+      </h5>
       <p>
         The default configuration is for this BEM formats:<br>
         - block-name__element-name--modifier-name@query<br>
@@ -57,10 +60,10 @@
           <label>Block</label>
         </div>
         <div class="three columns">
-          <input class="u-full-width" type="text" placeholder="Prefix" id="b-p">
+          <input class="u-full-width" type="text" placeholder="Prefix" id="bp">
         </div>
         <div class="five columns">
-          <select class="u-full-width" id="b-f">
+          <select class="u-full-width" id="bf">
             <option value="pascal">PascalCase</option>
             <option value="camel">camelCase</option>
             <option value="kebab" selected>kebab-case</option>
@@ -78,10 +81,10 @@
           <label>Element</label>
         </div>
         <div class="three columns">
-          <input class="u-full-width" type="text" placeholder="Prefix: __" id="e-p">
+          <input class="u-full-width" type="text" placeholder="Prefix: __" id="ep">
         </div>
         <div class="five columns">
-          <select class="u-full-width" id="e-f">
+          <select class="u-full-width" id="ef">
             <option value="pascal">PascalCase</option>
             <option value="camel">camelCase</option>
             <option value="kebab" selected>kebab-case</option>
@@ -99,10 +102,10 @@
           <label>Modifier</label>
         </div>
         <div class="three columns">
-          <input class="u-full-width" type="text" placeholder="Prefix: --" id="m-p">
+          <input class="u-full-width" type="text" placeholder="Prefix: --" id="mp">
         </div>
         <div class="five columns">
-          <select class="u-full-width" id="m-f">
+          <select class="u-full-width" id="mf">
             <option value="pascal">PascalCase</option>
             <option value="camel">camelCase</option>
             <option value="kebab" selected>kebab-case</option>
@@ -120,10 +123,10 @@
           <label>Query</label>
         </div>
         <div class="three columns">
-          <input class="u-full-width" type="text" placeholder="Prefix: @" id="q-p">
+          <input class="u-full-width" type="text" placeholder="Prefix: @" id="qp">
         </div>
         <div class="five columns">
-          <select class="u-full-width" id="q-f">
+          <select class="u-full-width" id="qf">
             <option value="pascal">PascalCase</option>
             <option value="camel">camelCase</option>
             <option value="kebab" selected>kebab-case</option>
@@ -141,10 +144,10 @@
           <label>State</label>
         </div>
         <div class="three columns">
-          <input class="u-full-width" type="text" placeholder="Prefix: -" id="s-p">
+          <input class="u-full-width" type="text" placeholder="Prefix: -" id="sp">
         </div>
         <div class="five columns">
-          <select class="u-full-width" id="s-f">
+          <select class="u-full-width" id="sf">
             <option value="pascal">PascalCase</option>
             <option value="camel">camelCase</option>
             <option value="kebab" selected>kebab-case</option>
@@ -172,54 +175,45 @@
           <input id="result" type="text" class="u-full-width">
         </div>
         <div class="three columns">
-          <button class="button-primary u-full-width" data-clipboard-target="#result">
+          <button class="button-primary u-full-width" data-clipboard-target="#result" data-ga-event="copy">
             Copy
           </button>
         </div>
       </div>
+      <div class="row">
+        <div class="nine columns">
+          <input id="url" type="text" class="u-full-width">
+        </div>
+        <div class="three columns">
+          <button class="button-primary u-full-width" data-clipboard-target="#url" data-ga-event="url">
+            Copy URL
+          </button>
+        </div>
+      </div>
+      <br>
+      <br>
+      <h5>Build with <a href="https://github.com/giacomozinetti/bemex">bemex</a></h5>
     </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
     <script src="./bower_components/bemex/bemex.js"></script>
-    <script type="text/javascript">
-      var clipboard = new Clipboard('.button-primary');
+    <script src="./beTools.js"></script>
+    <script>
+      beTools.onload();
 
-      clipboard.on('success', function(e) {
+      Object.keys(beTools.selectorMap).forEach(function(id) {
+        document.getElementById(id).addEventListener('change', beTools.update);
+        document.getElementById(id).addEventListener('keyup', beTools.update);
+      });
+
+      new Clipboard('.button-primary').on('success', function(e) {
         e.trigger.classList.add('done');
-        ga && ga('send', 'event', 'exp', 'copy', e.text);
+        ga && ga('send', 'event', 'exp',
+          e.trigger.getAttribute('data-ga-event'), e.text
+        );
         setTimeout(function() {
           e.trigger.classList.remove('done');
         }, 5000);
-      });
-
-      var generate = function() {
-        var re = BemEx({
-          blockPrefix: document.getElementById('b-p').value,
-          blockFormat: document.getElementById('b-f').value,
-          elementPrefix: document.getElementById('e-p').value,
-          elementFormat: document.getElementById('e-f').value,
-          modifierPrefix: document.getElementById('m-p').value,
-          modifierFormat: document.getElementById('m-f').value,
-          queryPrefix: document.getElementById('q-p').value,
-          queryFormat: document.getElementById('q-f').value,
-          statePrefix: document.getElementById('s-p').value,
-          stateFormat: document.getElementById('s-f').value,
-          states: document.getElementById('s').value,
-        });
-        document.getElementById('result').value = re;
-      };
-      generate();
-
-      [
-        'b-p', 'b-f',
-        'e-p', 'e-f',
-        'm-p', 'm-f',
-        'q-p', 'q-f',
-        's-p', 's-f',
-        's'
-      ].forEach(function(id) {
-        document.getElementById(id).addEventListener('change', generate)
-        document.getElementById(id).addEventListener('keyup', generate)
       });
     </script>
   </body>
