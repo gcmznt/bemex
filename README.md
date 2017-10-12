@@ -1,7 +1,7 @@
 # BemEx
 
 Generate Regexp to validate your CSS BEM syntax with linters.
-Try it on [http://giacomozinetti.github.io/bemex/](http://giacomozinetti.github.io/bemex/)
+Try it on [http://gcmznt.github.io/bemex/](http://gcmznt.github.io/bemex/)
 
 ### Installing
 
